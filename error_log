@@ -1,0 +1,12 @@
+[26-Sep-2018 12:58:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Connect.php:9
+Stack trace:
+#0 /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Functions.php(10): DB_Connect->connect()
+#1 /home/pnyalzqu5qvs/public_html/FeeCollector/register.php(5): DB_Functions->__construct()
+#2 {main}
+  thrown in /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Connect.php on line 9
+[26-Sep-2018 12:58:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_query() in /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Functions.php:12
+Stack trace:
+#0 /home/pnyalzqu5qvs/public_html/FeeCollector/register.php(5): DB_Functions->__construct()
+#1 {main}
+  thrown in /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Functions.php on line 12
+[26-Sep-2018 13:02:28 UTC] PHP Parse error:  syntax error, unexpected '->' (T_OBJECT_OPERATOR) in /home/pnyalzqu5qvs/public_html/FeeCollector/include/DB_Connect.php on line 9

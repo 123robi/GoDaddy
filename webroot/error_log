@@ -1,0 +1,3 @@
+[19-Nov-2018 13:45:06 UTC] PHP Fatal error:  Method Cake\ORM\Query::__toString() must not throw an exception, caught InvalidArgumentException: Fees is not associated with UsersFees in /home/pnyalzqu5qvs/public_html/FeeCollector/vendor/cakephp/cakephp/src/ORM/EagerLoader.php on line 245
+[07-Dec-2018 13:02:57 UTC] PHP Warning:  Unterminated comment starting line 58 in /home/pnyalzqu5qvs/public_html/FeeCollector/src/Controller/TeamsController.php on line 58
+[04-Jan-2019 10:11:49 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/pnyalzqu5qvs/public_html/FeeCollector/src/Controller/FeesController.php on line 2
