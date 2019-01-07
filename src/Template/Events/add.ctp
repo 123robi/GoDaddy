@@ -6,7 +6,7 @@
             <div class="input text required">
                 <?= $this->Form->label('Name'); ?>
             </div>
-            <?= $this->Form->select('name', ['Training','Match','Event'], ['empty' => 'Choose one','class' => 'form-control','required']) ?>
+            <?= $this->Form->select('name', ['Training' => 'Training','Match' => 'Match','Event' => 'Event'], ['empty' => 'Choose one','class' => 'form-control','required']) ?>
         </div>
         <div class="form-group datepicker">
             <div class="input text required label">
