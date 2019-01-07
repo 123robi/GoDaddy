@@ -6,7 +6,7 @@
         </div>
         <div style="width: 100%; height: 200px;" id="map"></div>
         <?= $this->Form->create($place) ?>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-sm-4">
                 <div class="form-group">
                     <?= $this->Form->control('name',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <?= $this->Form->button(__('Add Place'),['class'=>'btn btn-success btn-lg float-right login_button mt-5']); ?>
+        <?= $this->Form->button(__('Add Place'),['class'=>'btn btn-success btn-lg float-right login_button']); ?>
         <?= $this->Form->end() ?>
     </div>
 </div>
