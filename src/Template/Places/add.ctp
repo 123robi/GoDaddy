@@ -1,21 +1,38 @@
-
-<div class="form-group">
-    <input type="text" class="form-control" id="pac-input" placeholder="Search for place">
+<?= $this->element('navbar-team'); ?>
+<div class="container-fluid mt-4">
+    <div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
+        <div class="form-group">
+            <input type="text" class="form-control" id="pac-input" placeholder="Search for place">
+        </div>
+        <div style="width: 100%; height: 200px;" id="map"></div>
+        <?= $this->Form->create($place) ?>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <?= $this->Form->control('name',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <?= $this->Form->input('address',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <?= $this->Form->input('latlng',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
+                </div>
+            </div>
+        </div>
+        <?= $this->Form->button(__('Add Place'),['class'=>'btn btn-success btn-lg float-right login_button mt-5']); ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>
-<?= $this->Form->create($place) ?>
-<?= $this->Form->input('name',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
-<?= $this->Form->input('address',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
-<?= $this->Form->input('latlng',['class' => 'form-control', 'required', 'readonly' => 'readonly']) ?>
-<?= $this->Form->button(__('Add Place'),['class'=>'btn btn-success btn-lg float-right login_button mt-5']); ?>
-<?= $this->Form->end() ?>
-
-<div style="width: 400px; height: 600px;" id="map"></div>
 <script>
 
 	function initMap() {
 		var map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat: -33.8688, lng: 151.2195},
-			zoom: 13,
+			center: {lat: 54.5260, lng: 15.2551},
+			zoom: 3,
 			disableDefaultUI: true,
 			mapTypeId: 'roadmap'
 		});

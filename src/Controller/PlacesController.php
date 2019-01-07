@@ -12,6 +12,17 @@ use App\Controller\AppController;
  */
 class PlacesController extends AppController
 {
+	public function initialize()
+	{
+		parent::initialize();
+		$this->loadComponent('RequestHandler');
+		$this->loadModel('Users');
+		$this->loadModel('TeamMembers');
+		$this->loadModel('Events');
+		$this->loadModel('Places');
+		$this->loadModel('Teams');
+	}
+
 	/**
 	 * Index method
 	 *
@@ -63,6 +74,7 @@ class PlacesController extends AppController
 		}
 
 		$this->set('place', $place);
+		$this->set('team', $this->Teams->get($this->request->getParam('team_id')));
 	}
 
 	/**

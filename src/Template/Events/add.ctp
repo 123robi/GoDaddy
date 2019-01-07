@@ -35,9 +35,9 @@
         </div>
         <div class="form-group">
             <?= $this->Form->control('place_id',['options' => $places,'class' => 'form-control', 'required']) ?>
-            <?= $this->Html->link(__('Add new Place'), ['controller' => 'Places', 'action' => 'add', 'team_id' => $team->id]) ?>
-        </div>
-        <?= $this->Form->button(__('Add Event'),['class'=>'btn btn-success btn-lg float-right login_button mt-5']); ?>
+         </div>
+        <?= $this->Html->link(__('Add new Place'), ['controller' => 'Places', 'action' => 'add', 'team_id' => $team->id],['class' => 'btn btn-primary']) ?>
+        <?= $this->Form->button(__('Add Event'),['class'=>'btn btn-success float-right']); ?>
         <?= $this->Form->end() ?>
     </div>
 </div>
