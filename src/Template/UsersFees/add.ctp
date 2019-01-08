@@ -1,10 +1,6 @@
 <?= $this->element('navbar-team'); ?>
 <div class="container-fluid mt-4">
 	<div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
-		<!--<div class="visible-xs visible-sm mb-3">-->
-			<!--<?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar')), array('controller' => 'Events', 'action' => 'add', 'team_id' => $team->id), array('escape' => false,'class' => 'btn btn-primary small link-color')) ?>-->
-			<!--<?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-usd')).' Add fee', array('controller' => 'UsersFees', 'action' => 'add', 'team_id' => $team->id), array('escape' => false,'class' => 'pull-right text-right btn btn-primary small link-color')) ?>-->
-		<!--</div>-->
 		<?= $this->Form->create($usersFee) ?>
 		<div class="form-group">
 			<?= $this->Form->control('user_id',['options' => $users,'class' => 'form-control', 'required','empty' => 'Choose User']) ?>
@@ -12,6 +8,7 @@
 		<div class="form-group">
 			<?= $this->Form->control('fee_id',['options' => $fees,'class' => 'form-control', 'required','empty' => 'Choose Fee']) ?>
 		</div>
+		<?= $this->Html->link(__('Add new Fee'), ['controller' => 'Fees', 'action' => 'add', 'team_id' => $team->id],['class' => 'btn btn-primary']) ?>
 		<?= $this->Form->button(__('Add Fee to Member'),['class'=>'btn btn-success pull-right mb-3']); ?>
 		<?= $this->Form->end() ?>
 	</div>

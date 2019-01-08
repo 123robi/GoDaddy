@@ -91,8 +91,12 @@ Router::scope('/', function ($routes) {
 			Router::connect('teams/:team_id/places/', array('controller' => 'Places', 'action'  => 'index'));
 			Router::connect('teams/:team_id/places/:action/*', array('controller' => 'Places'));
 		});
+		$routes->resources('Fees', function ($routes) {
+			Router::connect('teams/:team_id/fees/', array('controller' => 'Fees', 'action'  => 'index'));
+			Router::connect('teams/:team_id/fees/:action/*', array('controller' => 'Fees'));
+		});
 		$routes->resources('UsersFees', function ($routes) {
-			Router::connect('teams/:team_id/add-fee/:action/*', array('controller' => 'UsersFees'));
+			Router::connect('teams/:team_id/addFeeToMember/:action/*', array('controller' => 'UsersFees'));
 		});
 		$routes->resources('TeamMembers', function ($routes) {
 			Router::connect('teams/:team_id/members/', array('controller' => 'TeamMembers', 'action'  => 'index'));
