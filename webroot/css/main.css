@@ -1,6 +1,8 @@
-html,body{max-width: 100%;width: 100%;background-color: white;height: 100%;}
+html,body{max-width: 100%;width: 100%;background-color: #51514F;height: 100%; color: white;}
+.navbar {background-color: #FF8C47;}
 .login {background-color: #51514F; max-width: 100%;width: 100%; height: 100%;}
 .login label,.login p{color: white;}
+label {color: white;}
 .login a {color: white}
 .login a:hover{color: white}
 button {cursor: pointer;}
@@ -11,40 +13,26 @@ button {cursor: pointer;}
 .margin-top {margin-top: 12rem;}
 .center-align {text-align: center;}
 .btn-success:focus{box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);}
-.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
-	background-color: #FD8E3D;border-color: #FD8E3D;
-}
-.btn-success:not(:disabled):not(.disabled).active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .show>.btn-success.dropdown-toggle:focus {
-	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {background-color: #FD8E3D;border-color: #FD8E3D;}
+.btn-success:not(:disabled):not(.disabled).active:focus, .btn-success:not(:disabled):not(.disabled):active:focus, .show>.btn-success.dropdown-toggle:focus {box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);}
 .table{table-layout: auto;}
-.card-body p {
-	color: black;
-}
-#map {
-	height: 200px;
-	width: 100%;
-}
-
+.card {color: black;}
+#map {height: 200px;width: 100%;}
+.card_user_name {text-align: center;}
+.paid{color: #00FF00}
+.not_paid{color: red}
+.hidden {display: none;}
+.small {font-size: 12px;}
+.link-color {background-color: #b32017; border-color: #b32017;}
+.link-color:hover {background-color: #b32017; border-color: #b32017;}
 /*datepicker modification*/
 .bootstrap-datetimepicker-widget{ight: auto !important;left: 0px !important;}
 .datepicker .input{width: 100%;}
 .datepicker .input-group {flex-wrap: unset;}
 .datepicker input[readonly] {background-color: white;}
-.datepicker .bootstrap-datetimepicker-widget.dropdown-menu {
-	width: 70%;
-}
+.datepicker .bootstrap-datetimepicker-widget.dropdown-menu {width: 70%;}
+.fc-content-skeleton {font-size: 12px;}
 
-
-.fc-content-skeleton {
-	font-size: 12px;
-}
-.card_user_name {text-align: center;}
-.paid{color: #00FF00}
-.not_paid{color: red}
-.hidden {
-	display: none;
-}
 
 
 

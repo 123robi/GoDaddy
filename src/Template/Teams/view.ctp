@@ -3,6 +3,10 @@
 <div class="container-fluid mt-3">
     <?php if (!empty($event)): ?>
         <div class="col-lg-6 offset-lg-3">
+            <div class="visible-xs visible-sm mb-3">
+                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar')), array('controller' => 'Events', 'action' => 'add', 'team_id' => $team->id), array('escape' => false,'class' => 'btn btn-primary small link-color')) ?>
+                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-usd')).' Add fee', array('controller' => 'Events', 'action' => 'add', 'team_id' => $team->id), array('escape' => false,'class' => 'pull-right text-right btn btn-primary small link-color')) ?>
+            </div>
             <div class="card">
                 <div class="card-header">
                     Next event
