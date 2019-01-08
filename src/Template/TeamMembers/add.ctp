@@ -1,28 +1,17 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\TeamMember $teamMember
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Team Members'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Teams'), ['controller' => 'Teams', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Team'), ['controller' => 'Teams', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="teamMembers form large-9 medium-8 columns content">
-    <?= $this->Form->create($teamMember) ?>
-    <fieldset>
-        <legend><?= __('Add Team Member') ?></legend>
-        <?php
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('team_id', ['options' => $teams]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<?= $this->element('navbar-team'); ?>
+<div class="container-fluid mt-4">
+    <div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
+        <?= $this->Form->create($user) ?>
+        <div class="form-group">
+            <?= $this->Form->control('name',['class' => 'form-control', 'required']) ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('email',['class' => 'form-control', 'required', 'type' => 'email']) ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->control('admin',['class' => 'form-control','type' => 'checkbox']) ?>
+        </div>
+        <?= $this->Form->button(__('Add Member'),['class'=>'btn btn-success pull-right mb-3']); ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>

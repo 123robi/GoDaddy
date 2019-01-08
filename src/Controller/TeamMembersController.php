@@ -105,19 +105,43 @@ class TeamMembersController extends AppController
 	 */
 	public function add()
 	{
+		$team = $this->Teams->get($this->request->getParam('team_id'));
+
+		$user = $this->Users->newEntity();
 		$teamMember = $this->TeamMembers->newEntity();
 		if ($this->request->is('post')) {
-			$teamMember = $this->TeamMembers->patchEntity($teamMember, $this->request->getData());
-			if ($this->TeamMembers->save($teamMember)) {
+//			$teamMember = $this->TeamMembers->patchEntity($teamMember, $this->request->getData());
+			$user = $this->Users
+				->find('all')
+				->where(['email' => $this->request->getData()['email']])->first();
+
+			if(empty($user)) {
+				$hash = $this->hashSSHA('dcf0c766059e870b45db92278593519b');
+				$user_data = [
+					'name' => $this->request->getData()['name'],
+					'email' => $this->request->getData()['email'],
+					'facebook_json' => '',
+					'password' => $hash['encrypted'],
+					'salt' => $hash['salt'],
+					'real_user' => 0,
+				];
+				$user = $this->Users->newEntity($user_data);
+			} else {
+				$this->Flash->error(__('User with this email already exists'));
+			}
+			if ($this->Users->save($user)) {
+				$this->TeamMembers->save($this->TeamMembers->newEntity([
+					'team_id' => $team->id,
+					'user_id' => $user->id,
+					'is_admin' => $this->request->getData()['admin']
+				]));
 				$this->Flash->success(__('The team member has been saved.'));
 
-				return $this->redirect(['action' => 'index']);
+				return $this->redirect(['action' => 'index','team_id' => $team->id]);
 			}
 			$this->Flash->error(__('The team member could not be saved. Please, try again.'));
 		}
-		$users = $this->TeamMembers->Users->find('list', ['limit' => 200]);
-		$teams = $this->TeamMembers->Teams->find('list', ['limit' => 200]);
-		$this->set(compact('teamMember', 'users', 'teams'));
+		$this->set(compact('user', 'team'));
 	}
 
 	/**
@@ -155,14 +179,24 @@ class TeamMembersController extends AppController
 	 */
 	public function delete($id = null)
 	{
+		$team = $this->Teams->get($this->request->getParam('team_id'));
+
 		$this->request->allowMethod(['post', 'delete']);
-		$teamMember = $this->TeamMembers->get($id);
+		$teamMember = $this->TeamMembers->find()->where(['user_id' => $id,'team_id' => $team->id])->first();
 		if ($this->TeamMembers->delete($teamMember)) {
 			$this->Flash->success(__('The team member has been deleted.'));
 		} else {
 			$this->Flash->error(__('The team member could not be deleted. Please, try again.'));
 		}
 
-		return $this->redirect(['action' => 'index']);
+		return $this->redirect(['action' => 'index','team_id' => $team->id]);
+	}
+	public function hashSSHA($password) {
+
+		$salt = sha1(rand());
+		$salt = substr($salt, 0, 10);
+		$encrypted = base64_encode(sha1($password . $salt, true) . $salt);
+		$hash = array("salt" => $salt, "encrypted" => $encrypted);
+		return $hash;
 	}
 }

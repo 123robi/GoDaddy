@@ -9,7 +9,7 @@
 			<th nowrap class="d-none d-xl-table-cell">Phone number</th>
 			<th nowrap class="d-none d-xl-table-cell">Address</th>
 			<th nowrap>Fee to pay</th>
-			<th class="text-center"><em class="fa fa-cog"></em></th>
+			<th class="text-right"><em class="fa fa-cog"></em></th>
 
 		</tr>
 		</thead>
@@ -32,13 +32,20 @@
 				 <td nowrap>0 <?= h($team->currency_symbol) ?></td>
 			<?php  }
 			   ?>
-			<td class="text-center">
-				<a class="btn btn-success" href="<?php echo $this->Url->build([
+			<td>
+				<?= $this->Form->postButton(
+				$this->Html->tag('i', '', array('class' => 'fa fa-trash')),
+				['controller' => 'TeamMembers', 'action' => 'delete','team_id' => $team->id, $member->id],
+				['confirm' => __('Are you sure you want to delete this Member?'),'class' => 'btn btn-danger pull-right']
+				)
+				?>
+				<a class="btn btn-success pull-right" href="<?php echo $this->Url->build([
 				'controller'=>'TeamMembers',
 				'action'=>'view',
 				'team_id' => $team->id,
 				$member->id
 				]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+
 			</td>
 		</tr>
 		<?php endforeach; ?>
@@ -60,8 +67,14 @@
 			<td nowrap>0 <?= h($team->currency_symbol) ?></td>
 			<?php  }
 			   ?>
-			<td class="text-center">
-				<a class="btn btn-success" href="<?php echo $this->Url->build([
+			<td>
+				<?= $this->Form->postButton(
+				$this->Html->tag('i', '', array('class' => 'fa fa-trash')),
+				['controller' => 'TeamMembers', 'action' => 'delete','team_id' => $team->id, $member->id],
+				['confirm' => __('Are you sure you want to delete this Member?'),'class' => 'btn btn-danger pull-right']
+				)
+				?>
+				<a class="btn btn-success pull-right" href="<?php echo $this->Url->build([
 				'controller'=>'TeamMembers',
 				'action'=>'view',
 				'team_id' => $team->id,
