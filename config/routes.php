@@ -79,7 +79,9 @@ Router::scope('/', function (RouteBuilder $routes) {
 
 Router::connect('/', array('controller' => 'teams','action'=>'index'));
 Router::connect('/login', array('controller' => 'users','action'=>'login'));
-Router::connect('/register', array('controller' => 'users','action'=>'register'));
+Router::connect('/register_step1', array('controller' => 'users','action'=>'register1'));
+Router::connect('/register', array('controller' => 'users','action'=>'register1'));
+Router::connect('/register_step2', array('controller' => 'users','action'=>'register2'));
 Router::connect('/index', array('controller' => 'users','action'=>'index'));
 
 Router::scope('/', function ($routes) {

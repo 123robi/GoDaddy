@@ -6,9 +6,6 @@
 			<?= $this->Form->control('name',['class' => 'form-control','required']) ?>
 		</div>
 		<div class="form-group">
-			<?= $this->Form->control('email',['class' => 'form-control', 'required', 'type' => 'email']) ?>
-		</div>
-		<div class="form-group">
 			<?= $this->Form->control('password',['class' => 'form-control', 'required','type' => 'password']) ?>
 		</div>
 		<div class="form-group">

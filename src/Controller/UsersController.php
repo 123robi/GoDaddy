@@ -20,11 +20,11 @@ class UsersController extends AppController
 		$this->loadComponent('RequestHandler');
 		$this->loadModel('Teams');
 		$this->loadComponent('Auth', [
-		'loginRedirect' => [
-			'controller' => 'teams',
-			'action' => 'index'
-		]
-	]);
+			'loginRedirect' => [
+				'controller' => 'teams',
+				'action' => 'index'
+			]
+		]);
 	}
 
 	public function beforeFilter(Event $event)
@@ -34,17 +34,49 @@ class UsersController extends AppController
 		$this->Auth->allow(['register', 'logout']);
 	}
 
-	public function register() {
+	public function register1() {
 		$user = $this->Users->newEntity();
+
 		if ($this->request->is('post')) {
-			$user = $this->Users->patchEntity($user, $this->request->getData());
-			$user->real_user = 1;
-			if ($this->Users->save($user)) {
-				$this->Flash->success(__('The user has been saved.'));
+			$exists = $this->Users->find()->where(['email' => $this->request->getData()['email'], 'real_user' => 1])->first();
+			if (empty($exists)) {
+				return $this->redirect(['action' => 'register2','email' => $this->request->getData()['email']]);
+			} else {
+				$this->Flash->error(__('The user with this email already exists'));
 
 				return $this->redirect(['action' => 'login']);
 			}
-			$this->Flash->error(__('The user could not be saved. Please, try again.'));
+		}
+		$this->set('user', $user);
+	}
+
+	public function register2() {
+		$user = $this->Users->newEntity();
+		if ($this->request->is('post')) {
+			$exists = $this->Users->find()->where(['email' => $this->request->getQuery('email'), 'real_user' => 0])->first();
+			if (empty($exists)) {
+				$user = $this->Users->patchEntity($user, $this->request->getData());
+				$user->email = $this->request->getQuery('email');
+				$user->real_user = 1;
+				if ($this->Users->save($user)) {
+					$this->Flash->success(__('The user has been saved.'));
+
+					return $this->redirect(['action' => 'login']);
+				}
+				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+			} else {
+				$exists->name = $this->request->getData('name');
+				$exists->password = $this->request->getData('password');
+				$exists->phone_number = $this->request->getData('phone_number');
+				$exists->address = $this->request->getData('address');
+				$exists->real_user = 1;
+				if ($this->Users->save($exists)) {
+					$this->Flash->success(__('The user has been saved.'));
+
+					return $this->redirect(['action' => 'login']);
+				}
+				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+			}
 		}
 		$this->set('user', $user);
 	}

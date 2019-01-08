@@ -12,7 +12,7 @@
 		<?= $this->Form->end() ?>
 
 		<div class="margin-top">
-			<p class="center-align">Do not have an account? <b><?php echo $this->Html->link('Sign up',['controller' => 'Users', 'action' => 'register'],['class' => 'center-align']); ?></b> </p>
+			<p class="center-align">Do not have an account? <b><?php echo $this->Html->link('Sign up',['controller' => 'Users', 'action' => 'register1'],['class' => 'center-align']); ?></b> </p>
 		</div>
 	</div>
 </div>
