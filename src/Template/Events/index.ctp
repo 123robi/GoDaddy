@@ -1,5 +1,5 @@
 <?= $this->element('navbar-team'); ?>
-<div>
+<div class="mt-3">
 	<div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
 		<div id='calendar'></div>
 		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -23,6 +23,7 @@
 				</div>
 			</div>
 		</div>
+		<?= $this->Html->link(__('Add new Event'), ['controller' => 'Events', 'action' => 'add', 'team_id' => $team->id],['class' => 'mt-3 btn btn-primary']) ?>
 	</div>
 </div>
 <script type="text/javascript">
