@@ -91,6 +91,9 @@ Router::scope('/', function ($routes) {
 			Router::connect('teams/:team_id/places/', array('controller' => 'Places', 'action'  => 'index'));
 			Router::connect('teams/:team_id/places/:action/*', array('controller' => 'Places'));
 		});
+		$routes->resources('UsersFees', function ($routes) {
+			Router::connect('teams/:team_id/add-fee/:action/*', array('controller' => 'UsersFees'));
+		});
 		$routes->resources('TeamMembers', function ($routes) {
 			Router::connect('teams/:team_id/members/', array('controller' => 'TeamMembers', 'action'  => 'index'));
 			$routes->resources('UserFees', function () {

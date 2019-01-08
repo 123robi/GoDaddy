@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * UsersFees Controller
@@ -21,6 +22,7 @@ class UsersFeesController extends AppController
 		$this->loadModel('Events');
 		$this->loadModel('Places');
 		$this->loadModel('Teams');
+		$this->loadModel('Fees');
 	}
 	/**
 	 * Change method
@@ -38,104 +40,118 @@ class UsersFeesController extends AppController
 
 		return $this->redirect(['controller' => 'TeamMembers','action'=>'view','team_id' => $team->id,$member->id]);
 	}
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users', 'Fees', 'Teams']
-        ];
-        $usersFees = $this->paginate($this->UsersFees);
+	/**
+	 * Index method
+	 *
+	 * @return \Cake\Http\Response|void
+	 */
+	public function index()
+	{
+		$this->paginate = [
+			'contain' => ['Users', 'Fees', 'Teams']
+		];
+		$usersFees = $this->paginate($this->UsersFees);
 
-        $this->set(compact('usersFees'));
-    }
+		$this->set(compact('usersFees'));
+	}
 
-    /**
-     * View method
-     *
-     * @param string|null $id Users Fee id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $usersFee = $this->UsersFees->get($id, [
-            'contain' => ['Users', 'Fees', 'Teams']
-        ]);
+	/**
+	 * View method
+	 *
+	 * @param string|null $id Users Fee id.
+	 * @return \Cake\Http\Response|void
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function view($id = null)
+	{
+		$usersFee = $this->UsersFees->get($id, [
+			'contain' => ['Users', 'Fees', 'Teams']
+		]);
 
-        $this->set('usersFee', $usersFee);
-    }
+		$this->set('usersFee', $usersFee);
+	}
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $usersFee = $this->UsersFees->newEntity();
-        if ($this->request->is('post')) {
-            $usersFee = $this->UsersFees->patchEntity($usersFee, $this->request->getData());
-            if ($this->UsersFees->save($usersFee)) {
-                $this->Flash->success(__('The users fee has been saved.'));
+	/**
+	 * Add method
+	 *
+	 * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+	 */
+	public function add()
+	{
+		$team = $this->Teams->get($this->request->getParam('team_id'));
+		$usersFee = $this->UsersFees->newEntity();
+		if ($this->request->is('post')) {
+			$usersFee = $this->UsersFees->patchEntity($usersFee, $this->request->getData());
+			$usersFee->team_id = $team->id;
+			$usersFee->paid = 0;
+			$usersFee->date = Time::now();
+			if ($this->UsersFees->save($usersFee)) {
+				$this->Flash->success(__('The users fee has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The users fee could not be saved. Please, try again.'));
-        }
-        $users = $this->UsersFees->Users->find('list', ['limit' => 200]);
-        $fees = $this->UsersFees->Fees->find('list', ['limit' => 200]);
-        $teams = $this->UsersFees->Teams->find('list', ['limit' => 200]);
-        $this->set(compact('usersFee', 'users', 'fees', 'teams'));
-    }
+				return $this->redirect(['action' => 'add','team_id' => $team->id]);
+			}
+			$this->Flash->error(__('The users fee could not be saved. Please, try again.'));
+		}
+		$users = $this->Users->find('list');
+		$users->innerJoinWith('TeamMembers', function ($q) {
+			$team = $this->Teams->get($this->request->getParam('team_id'));
+			return $q->where(['TeamMembers.team_id' => $team->id]);
+		});
+		$fees = $this->Fees->find('list')->where(['team_id' => $team->id]);
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Users Fee id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $usersFee = $this->UsersFees->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $usersFee = $this->UsersFees->patchEntity($usersFee, $this->request->getData());
-            if ($this->UsersFees->save($usersFee)) {
-                $this->Flash->success(__('The users fee has been saved.'));
+		$userFees = $this->UsersFees->find('all')->orderDesc('date')->limit(8);
+		$userFees->innerJoinWith('Users');
+		$userFees->innerJoinWith('Fees');
+		$userFees->select(['Users.id','Users.name','UsersFees.paid','UsersFees.date','Fees.name']);
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The users fee could not be saved. Please, try again.'));
-        }
-        $users = $this->UsersFees->Users->find('list', ['limit' => 200]);
-        $fees = $this->UsersFees->Fees->find('list', ['limit' => 200]);
-        $teams = $this->UsersFees->Teams->find('list', ['limit' => 200]);
-        $this->set(compact('usersFee', 'users', 'fees', 'teams'));
-    }
+		$this->set('team', $team);
+		$this->set(compact('usersFee', 'users', 'fees','userFees'));
+	}
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Users Fee id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $usersFee = $this->UsersFees->get($id);
-        if ($this->UsersFees->delete($usersFee)) {
-            $this->Flash->success(__('The users fee has been deleted.'));
-        } else {
-            $this->Flash->error(__('The users fee could not be deleted. Please, try again.'));
-        }
+	/**
+	 * Edit method
+	 *
+	 * @param string|null $id Users Fee id.
+	 * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+	 * @throws \Cake\Network\Exception\NotFoundException When record not found.
+	 */
+	public function edit($id = null)
+	{
+		$usersFee = $this->UsersFees->get($id, [
+			'contain' => []
+		]);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$usersFee = $this->UsersFees->patchEntity($usersFee, $this->request->getData());
+			if ($this->UsersFees->save($usersFee)) {
+				$this->Flash->success(__('The users fee has been saved.'));
 
-        return $this->redirect(['action' => 'index']);
-    }
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->error(__('The users fee could not be saved. Please, try again.'));
+		}
+		$users = $this->UsersFees->Users->find('list', ['limit' => 200]);
+		$fees = $this->UsersFees->Fees->find('list', ['limit' => 200]);
+		$teams = $this->UsersFees->Teams->find('list', ['limit' => 200]);
+		$this->set(compact('usersFee', 'users', 'fees', 'teams'));
+	}
+
+	/**
+	 * Delete method
+	 *
+	 * @param string|null $id Users Fee id.
+	 * @return \Cake\Http\Response|null Redirects to index.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function delete($id = null)
+	{
+		$this->request->allowMethod(['post', 'delete']);
+		$usersFee = $this->UsersFees->get($id);
+		if ($this->UsersFees->delete($usersFee)) {
+			$this->Flash->success(__('The users fee has been deleted.'));
+		} else {
+			$this->Flash->error(__('The users fee could not be deleted. Please, try again.'));
+		}
+
+		return $this->redirect(['action' => 'index']);
+	}
 }
