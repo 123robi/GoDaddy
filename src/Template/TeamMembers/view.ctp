@@ -59,7 +59,7 @@
 											<div class="pull-right">
 												<?= $this->Form->postButton(
 												__('Pay'),
-												['controller' => 'UsersFees', 'action' => 'change','team_id' => $team->id,'user_id' => $member->id, $fee->id],
+												['controller' => 'UsersFees', 'action' => 'change','team_id' => $team->id,$member->id, $fee->id],
 												['confirm' => __('Are you sure you want continue and pay the fee? \nFEE: {0}\nAT: {1}', $fee->_matchingData['Fees']->name,$this->Time->format($fee->date,'d.MM.y HH:mm')),'class' => 'btn btn-success']
 												)
 											?>

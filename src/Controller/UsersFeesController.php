@@ -29,16 +29,15 @@ class UsersFeesController extends AppController
 	 *
 	 * @return \Cake\Http\Response
 	 */
-	public function change($fee_id)
+	public function change($user_id,$fee_id)
 	{
 		$member_fee = $this->UsersFees->get($fee_id);
 		$member_fee->paid = 1;
 		$this->UsersFees->save($member_fee);
 
 		$team = $this->Teams->get($this->request->getParam('team_id'));
-		$member = $this->Users->get($this->request->getParam('user_id'));
 
-		return $this->redirect(['controller' => 'TeamMembers','action'=>'view','team_id' => $team->id,$member->id]);
+		return $this->redirect(['controller' => 'TeamMembers','action'=>'view','team_id' => $team->id,$user_id]);
 	}
 	/**
 	 * Index method
