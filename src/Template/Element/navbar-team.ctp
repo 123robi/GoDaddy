@@ -19,6 +19,9 @@
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'TeamMembers', 'action' => 'index','team_id' => $team->id)) ?>">Members</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'TeamMembers', 'action' => 'add','team_id' => $team->id)) ?>">Add Member</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'Fees', 'action' => 'add','team_id' => $team->id)) ?>">Add Fee</a>
 			</li>
 			<li class="nav-item">
