@@ -33,7 +33,9 @@
             <div class="card-header ">
                 <div>
                     <span class="text-left">You don't have any next event!</span>
-                    <?php echo $this->Html->link('Create new event',['controller' => 'Events', 'action' => 'add','team_id' => $team->id],['class' => 'text-right btn btn-success center-align']); ?>
+                    <?php
+                      if($is_admin) {
+                      echo $this->Html->link('Create new event',['controller' => 'Events', 'action' => 'add','team_id' => $team->id],['class' => 'text-right btn btn-success center-align']); }?>
                 </div>
             </div>
         </div>

@@ -73,6 +73,7 @@ class EventsController extends AppController
 		}
 		$this->set('events', json_encode($events));
 		$this->set('team', $this->Teams->get($this->request->getParam('team_id')));
+		$this->set('team_id', $this->request->getParam('team_id'));
 	}
 
 	/**

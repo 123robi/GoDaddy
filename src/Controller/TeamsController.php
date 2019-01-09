@@ -26,12 +26,14 @@ class TeamsController extends AppController
 
 	public function beforeFilter(Event $event)
 	{
-		$teamId = $this->request->getParam('pass')[0];
-		$userID = $this->Auth->user('id');
-		if ($this->TeamMembers->isAdmin($teamId, $userID)) {
-			$this->set('is_admin', true);
-		} else {
-			$this->set('is_admin', false);
+		if(in_array($this->request->getParam('action'), ['view'])) {
+			$teamId = $this->request->getParam('pass')[0];
+			$userID = $this->Auth->user('id');
+			if ($this->TeamMembers->isAdmin($teamId, $userID)) {
+				$this->set('is_admin', true);
+			} else {
+				$this->set('is_admin', false);
+			}
 		}
 	}
 

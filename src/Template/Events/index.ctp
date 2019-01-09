@@ -29,6 +29,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		var team_id = "<?php echo $team_id; ?>";
 		$('#calendar').fullCalendar({
 			header: {
 				right: 'prev,next',
@@ -42,15 +43,15 @@
 			eventSources: [
 
 				{
-					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsEvent?id=76',
+					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsEvent?id=' + team_id,
 					color: '#8A66D9'
 				},
 				{
-					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsTraining?id=76',
+					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsTraining?id=' + team_id,
 					color: '#F38C70',
 				},
 				{
-					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsMatch?id=76',
+					url: 'http://rkosir.eu/FeeCollector/eventsApi/getEventsMatch?id=' + team_id,
 					color: '#8ABF3E',
 				}
 
@@ -94,7 +95,6 @@
 				$("#eventView").attr("href", "http://rkosir.eu/FeeCollector/teams/"+ calEvent.team_id +"/events/view/" + calEvent.id);
 				$('#time').text("From: " + output);
 				$('#timeTo').text("To: " + to);
-				// window.location.assign("http://rkosir.eu/FeeCollector/teams/"+ calEvent.team_id +"/events/view/" + calEvent.id);
 			},
 		});
 	});
