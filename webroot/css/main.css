@@ -33,6 +33,7 @@ button {cursor: pointer;}
 .datepicker .bootstrap-datetimepicker-widget.dropdown-menu {width: 70%;}
 .fc-content-skeleton {font-size: 12px;}
 .modal-content{color: black;}
+.fc-today {background-color: #907272;color: white;}
 
 
 
