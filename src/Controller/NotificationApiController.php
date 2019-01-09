@@ -17,7 +17,10 @@ class NotificationApiController extends AppController
         $this->loadModel('Places');
         $this->loadModel('TeamMembers');
 	}
-
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);

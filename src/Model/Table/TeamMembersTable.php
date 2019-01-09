@@ -81,4 +81,8 @@ class TeamMembersTable extends Table
 
         return $rules;
     }
+	public function idAdmin($teamid, $userId)
+	{
+		return $this->exists(['team_id' => $teamid, 'user_id' => $userId, 'is_admin' => 1]);
+	}
 }

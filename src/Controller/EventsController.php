@@ -22,6 +22,22 @@ class EventsController extends AppController
 		$this->loadModel('Places');
 		$this->loadModel('Teams');
 	}
+
+	public function isAuthorized($user)
+	{
+		if (in_array($this->request->getParam('action'), ['index','view'])) {
+			return true;
+		}
+
+		if (in_array($this->request->getParam('action'), ['add'])) {
+			$teamId = $this->request->getParam('team_id');
+			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 	/**
 	 * Index method
 	 *

@@ -27,6 +27,22 @@ class UsersController extends AppController
 		]);
 	}
 
+	public function isAuthorized($user)
+	{
+		if (in_array($this->request->getParam('action'), ['register1','register2','login','logout','add'])) {
+			return true;
+		}
+
+		if (in_array($this->request->getParam('action'), ['delete'])) {
+			$teamId = $this->request->getParam('team_id');
+			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);

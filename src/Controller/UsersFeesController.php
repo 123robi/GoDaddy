@@ -23,6 +23,22 @@ class UsersFeesController extends AppController
 		$this->loadModel('Places');
 		$this->loadModel('Teams');
 		$this->loadModel('Fees');
+		$this->loadModel('TeamMembers');
+	}
+	public function isAuthorized($user)
+	{
+		if (in_array($this->request->getParam('action'), ['index','view'])) {
+			return true;
+		}
+
+		if (in_array($this->request->getParam('action'), ['delete','add','change'])) {
+			$teamId = $this->request->getParam('team_id');
+			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 	/**
 	 * Change method

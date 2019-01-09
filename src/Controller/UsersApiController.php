@@ -15,7 +15,10 @@ class UsersApiController extends AppController
 		$this->loadModel('Images');
 		$this->loadModel('Teams');
 	}
-
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);

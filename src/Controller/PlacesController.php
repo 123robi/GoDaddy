@@ -23,6 +23,22 @@ class PlacesController extends AppController
 		$this->loadModel('Teams');
 	}
 
+	public function isAuthorized($user)
+	{
+		if (in_array($this->request->getParam('action'), ['index','add','view'])) {
+			return true;
+		}
+
+		if (in_array($this->request->getParam('action'), ['delete'])) {
+			$teamId = (int)$this->request->getParam('pass.0');
+			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Index method
 	 *

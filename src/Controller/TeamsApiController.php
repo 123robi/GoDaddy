@@ -22,7 +22,10 @@ class TeamsApiController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow();
 	}
-
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function add() {
 		$name = $this->request->getData('team_name');
 		$email = $this->request->getData('email');

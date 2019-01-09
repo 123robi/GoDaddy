@@ -16,7 +16,10 @@ class TeamMembersApiController extends AppController
 		$this->loadModel('UsersFees');
 		$this->loadModel('Fees');
 	}
-
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);

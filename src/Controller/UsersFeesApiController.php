@@ -22,7 +22,10 @@ class UsersFeesApiController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow();
 	}
-
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function addFee()
 	{
 		$email = $this->request->getData('email');

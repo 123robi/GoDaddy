@@ -22,6 +22,14 @@ class TeamsController extends AppController
 		$this->loadModel('Events');
 		$this->loadModel('Places');
 	}
+	public function isAuthorized($user)
+	{
+		if (in_array($this->request->getParam('action'), ['index','add','view'])) {
+			return true;
+		}
+
+		return false;
+	}
 	/**
 	 * Index method
 	 *
@@ -56,28 +64,28 @@ class TeamsController extends AppController
 	{
 
 		$id = $this->request->getParam('pass')[0];
-		$is_admin = $this->TeamMembers
-			->find('all')
-			->where(['user_id' => $this->Auth->user('id'), 'team_id' => $id, 'is_admin' => 1])->first();
+//		$is_admin = $this->TeamMembers
+//			->find('all')
+//			->where(['user_id' => $this->Auth->user('id'), 'team_id' => $id, 'is_admin' => 1])->first();
 
-		if (!empty($is_admin)) {
-			$team = $this->Teams->get($id, [
-				'contain' => ['Events', 'Fees', 'Places', 'TeamMembers', 'UsersFees']
-			]);
-			$event = $this->Events
-				->find('all')
-				->where(['Events.team_id' => $id])
-				->andWhere(['Events.start > NOW()'])
-				->order(['Events.start' => 'ASC'])
-				->first()
-			;
-			if (!empty($event)) {
-				$place = $this->Places->get($event->place_id);
-				$this->set('place', $place);
-			}
-			$this->set('event', $event);
-			$this->set('team', $team);
+
+		$team = $this->Teams->get($id, [
+			'contain' => ['Events', 'Fees', 'Places', 'TeamMembers', 'UsersFees']
+		]);
+		$event = $this->Events
+			->find('all')
+			->where(['Events.team_id' => $id])
+			->andWhere(['Events.start > NOW()'])
+			->order(['Events.start' => 'ASC'])
+			->first()
+		;
+		if (!empty($event)) {
+			$place = $this->Places->get($event->place_id);
+			$this->set('place', $place);
 		}
+		$this->set('event', $event);
+		$this->set('team', $team);
+
 	}
 
 	/**

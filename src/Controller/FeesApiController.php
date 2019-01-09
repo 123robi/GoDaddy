@@ -16,6 +16,10 @@ class FeesApiController extends AppController
 		$this->loadModel('Users');
 		$this->loadModel('UsersFees');
 	}
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 	public function beforeFilter(Event $event)
 	{
 		parent::beforeFilter($event);
