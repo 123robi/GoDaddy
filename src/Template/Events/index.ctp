@@ -6,7 +6,7 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="name"></h4>
+						<h4 class="modal-title" id="name">asd</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -76,8 +76,6 @@
 					minutes = "0" + minutes;
 				}
 				var output = day + " " + month + " " + year + " " + hour + ":" + minutes;
-				console.log(hour.length);
-				console.log(hour);
 
 				var date = new Date(calEvent.end);
 				var day = date.getDate();
