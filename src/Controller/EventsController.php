@@ -31,7 +31,7 @@ class EventsController extends AppController
 
 		if (in_array($this->request->getParam('action'), ['add'])) {
 			$teamId = $this->request->getParam('team_id');
-			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+			if ($this->TeamMembers->isAdmin($teamId, $user['id'])) {
 				return true;
 			}
 		}

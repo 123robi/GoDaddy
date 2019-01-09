@@ -31,7 +31,7 @@ class PlacesController extends AppController
 
 		if (in_array($this->request->getParam('action'), ['delete'])) {
 			$teamId = (int)$this->request->getParam('pass.0');
-			if ($this->TeamMembers->idAdmin($teamId, $user['id'])) {
+			if ($this->TeamMembers->isAdmin($teamId, $user['id'])) {
 				return true;
 			}
 		}
