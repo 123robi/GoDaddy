@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Event\Event;
 
 /**
  * UsersFees Controller
@@ -25,6 +26,18 @@ class UsersFeesController extends AppController
 		$this->loadModel('Fees');
 		$this->loadModel('TeamMembers');
 	}
+
+	public function beforeFilter(Event $event)
+	{
+		$teamId = $this->request->getParam('team_id');
+		$userID = $this->Auth->user('id');
+		if ($this->TeamMembers->isAdmin($teamId, $userID)) {
+			$this->set('is_admin', true);
+		} else {
+			$this->set('is_admin', false);
+		}
+	}
+
 	public function isAuthorized($user)
 	{
 		if (in_array($this->request->getParam('action'), ['index','view'])) {

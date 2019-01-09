@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Fees Controller
@@ -23,6 +24,17 @@ class FeesController extends AppController
 		$this->loadModel('Teams');
 		$this->loadModel('Fees');
 		$this->loadModel('TeamMembers');
+	}
+
+	public function beforeFilter(Event $event)
+	{
+		$teamId = $this->request->getParam('team_id');
+		$userID = $this->Auth->user('id');
+		if ($this->TeamMembers->isAdmin($teamId, $userID)) {
+			$this->set('is_admin', true);
+		} else {
+			$this->set('is_admin', false);
+		}
 	}
 
 	public function isAuthorized($user)

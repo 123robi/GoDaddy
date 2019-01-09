@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\Event\Event;
 
 /**
  * Teams Controller
@@ -22,6 +23,18 @@ class TeamsController extends AppController
 		$this->loadModel('Events');
 		$this->loadModel('Places');
 	}
+
+	public function beforeFilter(Event $event)
+	{
+		$teamId = $this->request->getParam('pass')[0];
+		$userID = $this->Auth->user('id');
+		if ($this->TeamMembers->isAdmin($teamId, $userID)) {
+			$this->set('is_admin', true);
+		} else {
+			$this->set('is_admin', false);
+		}
+	}
+
 	public function isAuthorized($user)
 	{
 		if (in_array($this->request->getParam('action'), ['index','add','view','delete'])) {

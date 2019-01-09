@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Places Controller
@@ -21,6 +22,17 @@ class PlacesController extends AppController
 		$this->loadModel('Events');
 		$this->loadModel('Places');
 		$this->loadModel('Teams');
+	}
+
+	public function beforeFilter(Event $event)
+	{
+		$teamId = $this->request->getParam('team_id');
+		$userID = $this->Auth->user('id');
+		if ($this->TeamMembers->isAdmin($teamId, $userID)) {
+			$this->set('is_admin', true);
+		} else {
+			$this->set('is_admin', false);
+		}
 	}
 
 	public function isAuthorized($user)

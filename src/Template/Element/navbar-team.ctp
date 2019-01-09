@@ -12,21 +12,33 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'Events', 'action' => 'index','team_id' => $team->id)) ?>">Events</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'Events', 'action' => 'add','team_id' => $team->id)) ?>">Add Event</a>
-			</li>
+			<?php
+                if($is_admin) { ?>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'Events', 'action' => 'add','team_id' => $team->id)) ?>">Add Event</a>
+				</li>
+			<?php } ?>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'TeamMembers', 'action' => 'index','team_id' => $team->id)) ?>">Members</a>
 			</li>
+			<?php
+                if($is_admin) { ?>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'TeamMembers', 'action' => 'add','team_id' => $team->id)) ?>">Add Member</a>
 			</li>
+			<?php } ?>
+			<?php
+                if($is_admin) { ?>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'Fees', 'action' => 'add','team_id' => $team->id)) ?>">Add Fee</a>
 			</li>
+			<?php } ?>
+			<?php
+                if($is_admin) { ?>
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo $this->Url->build(array('controller' => 'UsersFees', 'action' => 'add','team_id' => $team->id)) ?>">Add Fee to Member</a>
 			</li>
+			<?php } ?>
 		</ul>
 	</div>
 </nav>
