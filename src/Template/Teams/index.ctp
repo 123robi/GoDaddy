@@ -10,7 +10,7 @@
             <th>Admin</th>
             <th class="d-none d-xl-table-cell">Created</th>
             <th class="d-none d-xl-table-cell">Modified</th>
-            <th class="text-center"><em class="fa fa-cog"></em></th>
+            <th class="text-right"><em class="fa fa-cog"></em></th>
 
         </tr>
         </thead>
@@ -23,8 +23,14 @@
             <td>Yes</td>
             <td class="d-none d-xl-table-cell"><?= h($team->created) ?></td>
             <td class="d-none d-xl-table-cell"><?= h($team->modified) ?></td>
-            <td class="text-center">
-                <a class="btn btn-success" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            <td>
+                <?= $this->Form->postButton(
+                $this->Html->tag('i', '', array('class' => 'fa fa-trash')),
+                ['controller' => 'Teams', 'action' => 'delete',$team->id],
+                ['confirm' => __('Are you sure you want to delete this Member?'),'class' => 'btn btn-danger pull-right']
+                )
+                ?>
+                <a class="btn btn-success pull-right" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -38,7 +44,7 @@
             <td class="d-none d-xl-table-cell"><?= h($team->created) ?></td>
             <td class="d-none d-xl-table-cell"><?= h($team->modified) ?></td>
             <td class="text-center">
-                <a class="btn btn-success" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                <a class="btn btn-success pull-right" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </td>
         </tr>
         <?php endforeach; ?>

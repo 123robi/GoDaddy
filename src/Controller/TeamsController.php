@@ -24,7 +24,7 @@ class TeamsController extends AppController
 	}
 	public function isAuthorized($user)
 	{
-		if (in_array($this->request->getParam('action'), ['index','add','view'])) {
+		if (in_array($this->request->getParam('action'), ['index','add','view','delete'])) {
 			return true;
 		}
 
@@ -159,11 +159,16 @@ class TeamsController extends AppController
 	public function delete($id = null)
 	{
 		$this->request->allowMethod(['post', 'delete']);
-		$team = $this->Teams->get($id);
-		if ($this->Teams->delete($team)) {
-			$this->Flash->success(__('The team has been deleted.'));
+		$userID = $this->Auth->user('id');
+		if ($this->TeamMembers->isAdmin($id, $userID)) {
+			$team = $this->Teams->get($id);
+			if ($this->Teams->delete($team)) {
+				$this->Flash->success(__('The team has been deleted.'));
+			} else {
+				$this->Flash->error(__('The team could not be deleted. Please, try again.'));
+			}
 		} else {
-			$this->Flash->error(__('The team could not be deleted. Please, try again.'));
+			$this->Flash->error(__('You are not authorized to access this location.'));
 		}
 
 		return $this->redirect(['action' => 'index']);
