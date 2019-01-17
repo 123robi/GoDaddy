@@ -65,16 +65,20 @@ class FeesApiController extends AppController
 
 	public function getFeeOfUserByEmail() {
 		$email = $this->request->getQuery('email');
+		$connection_number = $this->request->getQuery('connection_number');
 
 		$user = $this->Users
 			->find('all')
 			->where(['email' => $email])->first();
+		$team = $this->Teams
+			->find('all')
+			->where(['connection_number' => $connection_number])->first();
 
 		$fees = $this->UsersFees->find();
 		$fees->innerJoinWith('Fees');
 		$fees
 			->select(['UsersFees.id','UsersFees.paid','UsersFees.date','Fees.name','Fees.cost'])
-			->where([ 'UsersFees.user_id' => $user->id])
+			->where([ 'UsersFees.user_id' => $user->id, 'UsersFees.team_id' => $team->id])
 			->order(['UsersFees.paid', 'UsersFees.date']);
 
 		return $this->response->withType("json")->withStringBody(json_encode(['fees' => $fees]));
