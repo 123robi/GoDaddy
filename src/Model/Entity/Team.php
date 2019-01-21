@@ -13,8 +13,8 @@ use Cake\ORM\Entity;
  * @property string $connection_number
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $ical
  *
- * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Event[] $events
  * @property \App\Model\Entity\Fee[] $fees
  * @property \App\Model\Entity\Place[] $places
@@ -40,7 +40,7 @@ class Team extends Entity
         'connection_number' => true,
         'created' => true,
         'modified' => true,
-        'user' => true,
+        'ical' => true,
         'events' => true,
         'fees' => true,
         'places' => true,

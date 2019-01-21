@@ -97,6 +97,11 @@ class TeamsTable extends Table
             ->allowEmpty('connection_number')
             ->add('connection_number', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
+        $validator
+            ->scalar('ical')
+            ->maxLength('ical', 255)
+            ->allowEmpty('ical');
+
         return $validator;
     }
 
