@@ -59,9 +59,7 @@
 
 			eventColor: '#378006',
 			eventRender: function(event, element) {
-				element.qtip({
-					content: event.id
-				});
+					element.find('.fc-title').append("" + event.description);
 			},
 			eventClick: function(calEvent, jsEvent, view) {
 				const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
