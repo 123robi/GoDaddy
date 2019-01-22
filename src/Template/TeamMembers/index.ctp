@@ -15,7 +15,7 @@
 		</thead>
 		<?php foreach ($admin as $member): ?>
 		<tr>
-			<td nowrap><img src="http://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='http://rkosir.eu/images/noimage.png'", height="48" width="48"></td>
+			<td nowrap><img src="https://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='https://rkosir.eu/images/noimage.png'", height="48" width="48"></td>
 			<td nowrap><?= h($member->name) ?><br><small><i>admin</i></small></td>
 			<td nowrap class="d-none d-xl-table-cell"><?= h($member->email) ?></td>
 			<td nowrap class="d-none d-xl-table-cell"><a href="tel:<?= h($member->phone_number) ?>"><?= h($member->phone_number) ?></a></td>
@@ -53,7 +53,7 @@
 		<?php endforeach; ?>
 		<?php foreach ($members as $member): ?>
 		<tr>
-			<td nowrap><img src="http://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='http://rkosir.eu/images/noimage.png'", height="48" width="48"></td>
+			<td nowrap><img src="https://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='https://rkosir.eu/images/noimage.png'", height="48" width="48"></td>
 			<td nowrap><?= h($member->name) ?><br><small><i>member</i></small></td>
 			<td nowrap class="d-none d-xl-table-cell"><?= h($member->email) ?></td>
 			<td nowrap class="d-none d-xl-table-cell"><a href="tel:<?= h($member->phone_number) ?>"><?= h($member->phone_number) ?></a></td>
