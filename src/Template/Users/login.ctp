@@ -1,5 +1,5 @@
 <div class="login">
-	<img src="http://rkosir.eu/FeeCollector/img/logo.png" height="200px" width="200px" class="center">
+	<img src="https://rkosir.eu/FeeCollector/img/logo.png" height="200px" width="200px" class="center">
 	<div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
 		<?= $this->Form->create() ?>
 		<div class="form-group">
