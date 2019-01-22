@@ -25,12 +25,12 @@ class TeamsTableTest extends TestCase
      */
     public $fixtures = [
         'app.teams',
+        'app.events',
+        'app.places',
+        'app.fees',
         'app.users',
         'app.team_members',
-        'app.fees',
-        'app.users_fees',
-        'app.events',
-        'app.places'
+        'app.users_fees'
     ];
 
     /**

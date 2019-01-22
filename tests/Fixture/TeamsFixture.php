@@ -24,6 +24,7 @@ class TeamsFixture extends TestFixture
         'connection_number' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'ical' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'connection_number' => ['type' => 'unique', 'columns' => ['connection_number'], 'length' => []],
@@ -47,8 +48,9 @@ class TeamsFixture extends TestFixture
             'currency_code' => 'Lorem ipsum dolor sit amet',
             'currency_symbol' => 'Lorem ipsum dolor sit amet',
             'connection_number' => 'Lorem ipsum dolor sit amet',
-            'created' => '2018-12-05 12:47:07',
-            'modified' => '2018-12-05 12:47:07'
+            'created' => '2019-01-17 13:47:33',
+            'modified' => '2019-01-17 13:47:33',
+            'ical' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }
