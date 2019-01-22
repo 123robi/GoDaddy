@@ -24,7 +24,7 @@ $cakeDescription = 'FeeCollector, way to manage your team';
     <?= $this->Html->css(['bootstrap.min','main','fullcalendar','qtip.min','messages']) ?>
 
     <?= $this->Html->css(['fullcalendar.print'],['media'=>'print']) ?>
-    <?= $this->Html->script(['bootstrap.min', 'main','fullcalendar','moment.min','qtip.min']) ?>
+    <?= $this->Html->script(['bootstrap.min', 'main','fullcalendar','moment.min','qtip.min','gcal']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
