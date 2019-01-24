@@ -87,6 +87,9 @@ class TeamsController extends AppController
 		$team = $this->Teams->get($id, [
 			'contain' => ['Events', 'Fees', 'Places', 'TeamMembers', 'UsersFees']
 		]);
+		if($id== 1) {
+			return $this->redirect(['controller' => 'events', 'action' => 'index', 'team_id' => $team->id]);
+		}
 		$event = $this->Events
 			->find('all')
 			->where(['Events.team_id' => $id])
