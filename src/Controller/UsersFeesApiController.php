@@ -29,6 +29,7 @@ class UsersFeesApiController extends AppController
 	public function addFee()
 	{
 		$email = $this->request->getData('email');
+        $date = $this->request->getData('date');
 		$connection_number = $this->request->getData('connection_number');
 		$id = $this->request->getData('id');
 
@@ -67,9 +68,9 @@ class UsersFeesApiController extends AppController
 			$add_fee = [
 				'user_id' => $user->id,
 				'fee_id' => $fee->id,
+                'date' => $date,
 				'team_id' => $team->id,
 				'paid' => 0,
-				'date' => Time::now()
 			];
 
 		}

@@ -111,10 +111,10 @@ class FeesApiController extends AppController
 		$top3->innerJoinWith('Fees');
 		$top3
 			->select(['Users.id','Users.name','Users.email','Users.phone_number','Users.address','sum' => $top3->func()->sum('Fees.cost')])
-			->where(['UsersFees.team_id' => $team->id])
+			->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 0])
 			->group(['UsersFees.user_id'])
 			->order(['sum' => 'DESC'])
-			->limit(5)
+			->limit(7)
 		;
 
 		return $this->response->withType("json")->withStringBody(json_encode(['members' => $top3]));

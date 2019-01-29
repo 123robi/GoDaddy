@@ -112,7 +112,7 @@ class UsersFeesController extends AppController
 			$usersFee = $this->UsersFees->patchEntity($usersFee, $this->request->getData());
 			$usersFee->team_id = $team->id;
 			$usersFee->paid = 0;
-			$usersFee->date = Time::now();
+			//$usersFee->date = Time::now();
 			if ($this->UsersFees->save($usersFee)) {
 				$this->Flash->success(__('The users fee has been saved.'));
 

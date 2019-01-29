@@ -8,6 +8,17 @@
 		<div class="form-group">
 			<?= $this->Form->control('fee_id',['options' => $fees,'class' => 'form-control', 'required','empty' => 'Choose Fee']) ?>
 		</div>
+		<div class="form-group datepicker">
+			<div class="input text required label">
+				<?= $this->Form->label('Date'); ?>
+			</div>
+			<div class="input-group date" id="datetimepicker3" data-target-input="nearest">
+				<?= $this->Form->control('date',['label'=> false,'class' => 'form-control datetimepicker-input', 'required','data-target' => '#datetimepicker3', 'type' => 'text','readonly','value' => '']) ?>
+				<div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+					<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+				</div>
+			</div>
+		</div>
 		<?= $this->Html->link(__('Add new Fee'), ['controller' => 'Fees', 'action' => 'add', 'team_id' => $team->id],['class' => 'btn btn-primary']) ?>
 		<?= $this->Form->button(__('Add Fee to Member'),['class'=>'btn btn-success pull-right mb-3']); ?>
 		<?= $this->Form->end() ?>

@@ -8,6 +8,11 @@ $(document).ready(function() {
 		format: 'YYYY-MM-DD HH:mm'
 	});
 
+	$('#datetimepicker3').datetimepicker({
+		ignoreReadonly: true,
+		format: 'YYYY-MM-DD'
+	});
+
 	$('#confirmation').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget) // Button that triggered the modal
 		var recipient = button.data('fee_id') // Extract info from data-* attributes
