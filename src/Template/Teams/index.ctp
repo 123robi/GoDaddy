@@ -27,7 +27,7 @@
                 <?= $this->Form->postButton(
                 $this->Html->tag('i', '', array('class' => 'fa fa-trash')),
                 ['controller' => 'Teams', 'action' => 'delete',$team->id],
-                ['confirm' => __('Are you sure you want to delete this Member?'),'class' => 'btn btn-danger pull-right']
+                ['confirm' => __('Are you sure you want to delete this Team?'),'class' => 'btn btn-danger pull-right']
                 )
                 ?>
                 <a class="btn btn-success pull-right" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
