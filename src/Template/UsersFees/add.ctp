@@ -36,7 +36,7 @@
 		<?php foreach ($userFees as $fee): ?>
 		<tr>
 			<td nowrap><?= h($fee->_matchingData['Users']->name) ?></td>
-			<td nowrap><?= h($fee->_matchingData['Fees']->name) ?></td>
+			<td><?= h($fee->_matchingData['Fees']->name) ?></td>
 			<td nowrap class="d-none d-xl-table-cell"><?= h($fee->paid) ?></a></td>
 			<td nowrap><?= h($fee->date) ?></td>
 			<td class="text-right">

@@ -17,7 +17,7 @@
         <?php foreach ($adminTeams as $team): ?>
         <tr>
             <td nowrap class="d-none d-xl-table-cell"><?= $this->Number->format($team->id) ?></td>
-            <td nowrap><?= h($team->team_name) ?></td>
+            <td><?= h($team->team_name) ?></td>
             <td class="d-none d-xl-table-cell"><?= h($team->currency_code) ?></td>
             <td><?= h($team->currency_symbol) ?></td>
             <td>Yes</td>
