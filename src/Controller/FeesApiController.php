@@ -120,4 +120,35 @@ class FeesApiController extends AppController
 		return $this->response->withType("json")->withStringBody(json_encode(['members' => $top3]));
 
 	}
+
+	public function getSummaryFee() {
+        $connection_number = $this->request->getQuery('connection_number');
+        $team = $this->Teams
+            ->find('all')
+            ->where(['connection_number' => $connection_number])->first();
+
+        $total = $this->UsersFees->find();
+        $total->innerJoinWith('Fees');
+        $total
+            ->select(['sum' => $total->func()->sum('Fees.cost')])
+            ->where(['UsersFees.team_id' => $team->id])
+        ;
+
+
+        $notpaid = $this->UsersFees->find();
+        $notpaid->innerJoinWith('Fees');
+        $notpaid
+            ->select(['sum' => $notpaid->func()->sum('Fees.cost')])
+            ->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 0])
+        ;
+
+        $paid = $this->UsersFees->find();
+        $paid->innerJoinWith('Fees');
+        $paid
+            ->select(['sum' => $paid->func()->sum('Fees.cost')])
+            ->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 1])
+        ;
+
+        return $this->response->withType("json")->withStringBody(json_encode(['total' => $total, 'notpaid' => $notpaid, 'paid' => $paid]));
+    }
 }
