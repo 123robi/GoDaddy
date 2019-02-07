@@ -137,6 +137,27 @@ class FeesApiController extends AppController
 
 	}
 
+
+	public function getLast3FinedUsers() {
+		$connection_number = $this->request->getQuery('connection_number');
+		$team = $this->Teams
+			->find('all')
+			->where(['connection_number' => $connection_number])->first();
+
+		$top3 = $this->UsersFees->find();
+		$top3->innerJoinWith('Users');
+		$top3->innerJoinWith('Fees');
+		$top3
+			->select(['Users.id','Users.name','Users.email','Users.phone_number','Users.address', 'Fees.name'])
+			->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 0])
+			->order(['UsersFees.date' => 'DESC'])
+			->limit(3)
+		;
+
+		return $this->response->withType("json")->withStringBody(json_encode(['members' => $top3]));
+
+	}
+
 	public function getSummaryFee() {
         $connection_number = $this->request->getQuery('connection_number');
         $team = $this->Teams
