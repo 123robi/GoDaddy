@@ -83,6 +83,7 @@ class FeesApiController extends AppController
 
 		return $this->response->withType("json")->withStringBody(json_encode(['fees' => $fees]));
 	}
+
 	public function updateFeeOfUserByEmail() {
 		$id = $this->request->getData('id');
 
@@ -91,6 +92,21 @@ class FeesApiController extends AppController
 		$entity->paid = 1;
 
 		$this->UsersFees->save($entity);
+
+		$resultJ = json_encode([
+			'error' => false,
+		]);
+
+
+		return $this->response->withType("json")->withStringBody($resultJ);
+	}
+
+	public function deleteFeeOfUserByEmail() {
+		$id = $this->request->getData('id');
+
+		$entity = $this->UsersFees->get($id);
+
+		$this->UsersFees->delete($entity);
 
 		$resultJ = json_encode([
 			'error' => false,
