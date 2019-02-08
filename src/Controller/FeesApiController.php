@@ -148,7 +148,7 @@ class FeesApiController extends AppController
 		$top3->innerJoinWith('Users');
 		$top3->innerJoinWith('Fees');
 		$top3
-			->select(['Users.name', 'Fees.name', 'Fees.cost'])
+			->select(['Users.name', 'Users.email', 'Fees.name', 'Fees.cost'])
 			->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 0])
 			->order(['UsersFees.date' => 'DESC'])
 			->limit(3)
