@@ -122,6 +122,7 @@ Router::connect('/eventsApi/:action/*', array('controller' => 'eventsApi'));
 Router::connect('/placesApi/:action/*', array('controller' => 'placesApi'));
 Router::connect('/notificationApi/:action/*', array('controller' => 'notificationApi'));
 Router::connect('/usersFeesApi/:action/*', array('controller' => 'usersFeesApi'));
+Router::connect('/paymentsApi/:action/*', array('controller' => 'paymentsApi'));
 /**
  * Load all plugin routes. See the Plugin documentation on
  * how to customize the loading of plugin routes.
