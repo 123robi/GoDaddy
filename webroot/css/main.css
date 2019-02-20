@@ -34,6 +34,8 @@ button {cursor: pointer;}
 .fc-content-skeleton {font-size: 12px;}
 .modal-content{color: black;}
 .fc-today {background-color: #907272;color: white;}
+table td {color: white;}
+table thead th {color: white}
 
 
 
