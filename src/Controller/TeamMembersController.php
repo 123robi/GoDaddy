@@ -13,6 +13,9 @@ use Cake\Event\Event;
  */
 class TeamMembersController extends AppController
 {
+
+    const URL = "https://api.paylibo.com/paylibo/generator/czech/image?accountNumber=";
+
 	public function initialize()
 	{
 		parent::initialize();
@@ -21,7 +24,8 @@ class TeamMembersController extends AppController
 		$this->loadModel('UsersFees');
 		$this->loadModel('Events');
 		$this->loadModel('Places');
-		$this->loadModel('Teams');
+        $this->loadModel('Teams');
+        $this->loadModel('Payments');
 	}
 
 	public function beforeFilter(Event $event)
@@ -106,7 +110,28 @@ class TeamMembersController extends AppController
 			->where([ 'UsersFees.user_id' => $member->id])
 			->order(['UsersFees.paid', 'UsersFees.date']);
 
-		$this->set('team', $this->Teams->get($this->request->getParam('team_id')));
+        $team = $this->Teams->get($this->request->getParam('team_id'));
+        $feesQR = $this->UsersFees->find('all')->where(['user_id' => $id, 'team_id' => $team->id, 'paid' => 0]);
+
+        $sum = 0;
+        foreach ($feesQR as $fee) {
+            $sum += $fee->cost;
+        }
+
+        $payment = $this->Payments->find('all')->where(['team_id' => $team->id])->first();
+        if ($this->Auth->user('id') == $id && !empty($payment) && $team->currency_code == "CZK") {
+            $this->set('show', true);
+            $url = self::URL . $payment->account_number .
+                "&bankCode=" . $payment->bank_code .
+                "&amount=" . sprintf('%0.2f', $sum) .
+                "&currency=" . $team->currency_code .
+                "&message=" . $member->name;
+            $this->set('url', $url);
+        } else {
+            $this->set('show', false);
+        }
+
+		$this->set('team', $team);
 		$this->set('member', $member);
 		$this->set('fees', $fees);
 	}

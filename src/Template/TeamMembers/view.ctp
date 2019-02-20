@@ -1,29 +1,33 @@
 <?= $this->element('navbar-team'); ?>
-
-<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+<div class="mt-3">
+		<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="name">QR Platba</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img src="<?= h($url) ?>" alt="Error generating QR code">
+					</div>
+					<div class="modal-footer">
+						<?php if ($team->id != 1) { ?>
+						<a class="btn btn-primary" id="eventView" href="">Details</a>
+						<?php } ?>
+						<button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+</div>
 </div>
 <div class="container-fluid mt-3">
 	<div class="row">
 		<div class="col-lg-4">
 				<div class="card">
-					<img src="https://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='https://rkosir.eu/images/robikoser@gmail.com.jpg'", height="auto" width="100%">
+					<img id="profile" src="https://rkosir.eu/images/<?= h($member->email) ?>.jpg" onerror="this.src='https://rkosir.eu/images/robikoser@gmail.com.jpg'", height="auto/2" width="50%">
 					<div class="card-body">
 						<h5 class="card-title card_user_name"><?= h($member->name) ?></h5>
 						<b>Phone number: </b><a href="tel:<?= h($member->phone_number) ?>" class="pull-right"><?= h($member->phone_number) ?></a><br>
@@ -32,6 +36,13 @@
 				</div>
 		</div>
 		<div class="col-lg-8">
+			<?php
+			if ($show) { ?>
+				<button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#modal1">
+					QR Platba
+				</button>
+			<? }
+			?>
 		<?php foreach ($fees as $fee): ?>
 			<div class="row">
 				<div class="col-lg-12">
