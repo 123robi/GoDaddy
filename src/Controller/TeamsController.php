@@ -22,6 +22,7 @@ class TeamsController extends AppController
 		$this->loadModel('TeamMembers');
 		$this->loadModel('Events');
 		$this->loadModel('Places');
+		$this->loadModel('UsersFees');
 	}
 
 	public function beforeFilter(Event $event)
@@ -101,6 +102,21 @@ class TeamsController extends AppController
 			$place = $this->Places->get($event->place_id);
 			$this->set('place', $place);
 		}
+
+
+        $top3 = $this->UsersFees->find();
+        $top3->innerJoinWith('Users');
+        $top3->innerJoinWith('Fees');
+        $top3
+            ->select(['Users.name', 'Users.email', 'Fees.name', 'Fees.cost'])
+            ->where(['UsersFees.team_id' => $team->id, 'UsersFees.paid' => 0])
+            ->order(['UsersFees.date' => 'DESC'])
+            ->limit(3)
+        ;
+
+        $this->set('top3', $top3);
+
+
 		$this->set('event', $event);
 		$this->set('team', $team);
 

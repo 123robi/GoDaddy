@@ -41,6 +41,22 @@
         </div>
     </div>
     <?php endif; ?>
+    <div class="col-lg-6 offset-lg-3">
+        <?php foreach($top3 as $user) { ?>
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="d-flex">
+                    <td nowrap><img src="https://rkosir.eu/images/<?= h($user->_matchingData['Users']->email) ?>.jpg" onerror="this.src='https://rkosir.eu/images/noimage.png'", height="48" width="48"></td>
+                    <div>
+                        <p class="card-text ml-3 mb-0"><?= h($user->_matchingData['Users']->name) ?></p>
+                        <p class="card-text ml-3 mb-0"><?= h($user->_matchingData['Fees']->name) ?></p>
+                        <p class="card-text ml-3"><?= h($user->_matchingData['Fees']->cost) ?><?= h($team->currency_symbol) ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <?php } ?>
+    </div>
 </div>
 <script type="text/javascript">
    function initMap() {
