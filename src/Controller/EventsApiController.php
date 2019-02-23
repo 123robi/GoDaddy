@@ -89,6 +89,7 @@ class EventsApiController extends AppController
 		return $this->response->withType("json")->withStringBody(json_encode(['events' => $events]));
 	}
 	public function getEventsMatch() {
+        $this->response->header('Access-Control-Allow-Origin', '*');
 		$id = $this->request->getQuery('id');
 
 		$team = $this->Teams->get($id);
@@ -101,6 +102,7 @@ class EventsApiController extends AppController
 		return $this->response->withType("json")->withStringBody(json_encode($events));
 	}
 	public function getEventsTraining() {
+	    $this->response->header('Access-Control-Allow-Origin', '*');
 		$id = $this->request->getQuery('id');
 
 		$team = $this->Teams->get($id);
@@ -113,6 +115,7 @@ class EventsApiController extends AppController
 		return $this->response->withType("json")->withStringBody(json_encode($events));
 	}
 	public function getEventsEvent() {
+        $this->response->header('Access-Control-Allow-Origin', '*');
 		$id = $this->request->getQuery('id');
 
 		$team = $this->Teams->get($id);
