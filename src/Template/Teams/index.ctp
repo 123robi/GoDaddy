@@ -14,15 +14,23 @@
 
         </tr>
         </thead>
-        <?php foreach ($adminTeams as $team): ?>
+        <?php foreach ($teams as $team): ?>
         <tr>
             <td nowrap class="d-none d-xl-table-cell"><?= $this->Number->format($team->id) ?></td>
             <td><?= h($team->team_name) ?></td>
             <td class="d-none d-xl-table-cell"><?= h($team->currency_code) ?></td>
             <td><?= h($team->currency_symbol) ?></td>
-            <td>Yes</td>
+            <?php
+            if($team->_matchingData['TeamMembers']->is_admin) { ?>
+                <td>Yes</td>
+            <?php } else { ?>
+                <td>No</td>
+            <?php } ?>
+
             <td class="d-none d-xl-table-cell"><?= h($team->created) ?></td>
             <td class="d-none d-xl-table-cell"><?= h($team->modified) ?></td>
+            <?php
+            if($team->_matchingData['TeamMembers']->is_admin) { ?>
             <td>
                 <?= $this->Form->postButton(
                 $this->Html->tag('i', '', array('class' => 'fa fa-trash')),
@@ -32,20 +40,11 @@
                 ?>
                 <a class="btn btn-success pull-right" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </td>
-        </tr>
-        <?php endforeach; ?>
-        <?php foreach ($teams as $team): ?>
-        <tr>
-            <td class="d-none d-xl-table-cell"><?= $this->Number->format($team->id) ?></td>
-            <td><?= h($team->team_name) ?></td>
-            <td class="d-none d-xl-table-cell"><?= h($team->currency_code) ?></td>
-            <td><?= h($team->currency_symbol) ?></td>
-            <td>No</td>
-            <td class="d-none d-xl-table-cell"><?= h($team->created) ?></td>
-            <td class="d-none d-xl-table-cell"><?= h($team->modified) ?></td>
+            <?php } else { ?>
             <td class="text-center">
                 <a class="btn btn-success pull-right" href="<?php echo $this->Url->build(['controller'=>'Teams','action'=>'view', $team->id]) ?>"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </td>
+            <?php } ?>
         </tr>
         <?php endforeach; ?>
     </table>

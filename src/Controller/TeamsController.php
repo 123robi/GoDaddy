@@ -53,20 +53,15 @@ class TeamsController extends AppController
 	 */
 	public function index()
 	{
-		$teams = $this->Teams->find();
-		$teams->innerJoinWith('TeamMembers');
-		$teams
-			->find('all')
-			->where(['TeamMembers.user_id' => $this->Auth->user('id'),'TeamMembers.is_admin' => 0]);
 
-		$admin = $this->Teams->find();
-		$admin->innerJoinWith('TeamMembers');
-		$admin
-			->find('all')
-			->where(['TeamMembers.user_id' => $this->Auth->user('id'),'TeamMembers.is_admin' => 1]);
+        $teams = $this->Teams->find();
+        $teams->innerJoinWith('TeamMembers', function ($q) {
+            return $q->where(['TeamMembers.user_id' => $this->Auth->user('id')]);
+        });
+
+        $teams->select(['id', 'team_name','currency_code', 'currency_symbol', 'modified', 'created', 'TeamMembers.is_admin'])->orderDesc('TeamMembers.is_admin');
 
 		$this->set('teams', $teams);
-		$this->set('adminTeams', $admin);
 	}
 
 	/**
