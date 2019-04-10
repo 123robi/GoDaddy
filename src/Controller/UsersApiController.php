@@ -65,7 +65,11 @@ class UsersApiController extends AppController
 
 						$user->facebook_json = $facebook_json;
 						if (!is_null($fcm)) {
-                            $user->fcm = $fcm;
+                            $user1 = $this->Users
+                                ->find('all')
+                                ->where(['email' => $email])->first();
+                            $user1->fcm = $fcm;
+                            $this->Users->save($user1);
                         }
 						$this->Users->save($user);
 					}
