@@ -20,6 +20,8 @@ return array(
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
+    'SocialConnect\\Common\\' => array($vendorDir . '/socialconnect/common/src'),
+    'SocialConnect\\' => array($vendorDir . '/socialconnect/auth/src'),
     'Seld\\PharUtils\\' => array($vendorDir . '/seld/phar-utils/src'),
     'Seld\\JsonLint\\' => array($vendorDir . '/seld/jsonlint/src/Seld/JsonLint'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
@@ -48,5 +50,6 @@ return array(
     'App\\Test\\' => array($baseDir . '/tests'),
     'App\\' => array($baseDir . '/src'),
     'Ajgl\\Twig\\Extension\\' => array($vendorDir . '/ajgl/breakpoint-twig-extension/src'),
+    'ADmad\\SocialAuth\\' => array($vendorDir . '/admad/cakephp-social-auth/src'),
     '' => array($vendorDir . '/asm89/twig-cache-extension/lib'),
 );

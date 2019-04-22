@@ -15,4 +15,23 @@
 			<p class="center-align">Do not have an account? <b><?php echo $this->Html->link('Sign up',['controller' => 'Users', 'action' => 'register1'],['class' => 'center-align']); ?></b> </p>
 		</div>
 	</div>
+
+	<?echo $this->Form->postLink(
+	'Login with Facebook',
+	[
+	'prefix' => false,
+	'plugin' => 'ADmad/SocialAuth',
+	'controller' => 'Auth',
+	'action' => 'login',
+	'provider' => 'facebook',
+	'?' => ['redirect' => $this->request->getQuery('redirect')]
+	]
+	);?>
+
+	<div
+			class="fb-like"
+			data-share="true"
+			data-width="450"
+			data-show-faces="true">
+	</div>
 </div>

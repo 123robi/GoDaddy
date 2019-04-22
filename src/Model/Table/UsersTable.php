@@ -125,4 +125,33 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    public function getUser(\Cake\Datasource\EntityInterface $profile) {
+        // Make sure here that all the required fields are actually present
+        if (empty($profile->email)) {
+            throw new \RuntimeException('Could not find email in social profile.');
+        }
+
+        // Check if user with same email exists. This avoids creating multiple
+        // user accounts for different social identities of same user. You should
+        // probably skip this check if your system doesn't enforce unique email
+        // per user.
+        $user = $this->find()
+            ->where(['email' => $profile->email])
+            ->first();
+
+        if ($user) {
+            return $user;
+        }
+
+        // Create new user account
+        $user = $this->newEntity(['email' => $profile->email]);
+        $user = $this->save($user);
+
+        if (!$user) {
+            throw new \RuntimeException('Unable to save new user');
+        }
+
+        return $user;
+    }
 }
