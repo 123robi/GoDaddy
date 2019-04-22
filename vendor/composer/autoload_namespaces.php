@@ -9,8 +9,10 @@ return array(
     'josegonzalez\\Dotenv' => array($vendorDir . '/josegonzalez/dotenv/src', $vendorDir . '/josegonzalez/dotenv/tests'),
     'Umpirsky\\' => array($vendorDir . '/umpirsky/twig-php-function/src'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'PayPal' => array($vendorDir . '/paypal/rest-api-sdk-php/lib'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
+    'Hybrid' => array($vendorDir . '/hybridauth/hybridauth/hybridauth'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
     'Aptoma' => array($vendorDir . '/aptoma/twig-markdown/src'),
 );
