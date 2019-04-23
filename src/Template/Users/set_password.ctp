@@ -1,6 +1,11 @@
 <div class="container-fluid mt-4">
 	<div class="col-md-12 col-sm-12 col-lg-6 offset-lg-3">
 		<?= $this->Form->create($user) ?>
+		<?php if($needEmail) { ?>
+			<div class="form-group">
+				<?= $this->Form->control('email',['class' => 'form-control', 'required', 'type' => 'email']) ?>
+			</div>
+		<?php } ?>
 		<div class="form-group">
 			<?= $this->Form->control('password',['class' => 'form-control', 'required', 'type' => 'password']) ?>
 		</div>

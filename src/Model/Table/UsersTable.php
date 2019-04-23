@@ -128,8 +128,9 @@ class UsersTable extends Table
 
     public function getUser(\Cake\Datasource\EntityInterface $profile) {
         // Make sure here that all the required fields are actually present
+        $profile->email = null;
         if (empty($profile->email)) {
-            throw new \RuntimeException('Could not find email in social profile.');
+            $profile->email = $uniqid = 'required@' . uniqid() . '.com';
         }
 
         // Check if user with same email exists. This avoids creating multiple
@@ -149,7 +150,7 @@ class UsersTable extends Table
         $user = $this->save($user);
 
         if (!$user) {
-            throw new \RuntimeException('Unable to save new User ' . json_encode($profile));
+            throw new \RuntimeException('Unable to save new User ' . json_encode(['name' => $profile->full_name, 'email' => $profile->email, 'real_user' => 1, 'password' => '$%!ALkh#541gasg@#%123^#']));
         }
 
         return $user;

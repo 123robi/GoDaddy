@@ -124,10 +124,17 @@ class UsersController extends AppController
 			$user->password = $this->request->getData('password');
 			$user->phone_number = $this->request->getData('phone_number');
 			$user->address = $this->request->getData('address');
+			if (!empty($user->email)) {
+                $user->email = $this->request->getData('email');
+            }
 			if ($this->Users->save($user)) {
 				return $this->redirect(['controller' => 'Teams' , 'action' => 'index']);
 			}
 		}
+		if (strpos($user->email, 'required') !== false) {
+            $this->set('needEmail', true);
+            $user->email='';
+        }
 		$this->set(compact('user'));
 	}
 	/**
