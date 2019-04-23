@@ -128,7 +128,6 @@ class UsersTable extends Table
 
     public function getUser(\Cake\Datasource\EntityInterface $profile) {
         // Make sure here that all the required fields are actually present
-        $profile->email = null;
         if (empty($profile->email)) {
             $profile->email = $uniqid = 'required@' . uniqid() . '.com';
         }

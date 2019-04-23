@@ -39,6 +39,13 @@ class FeesController extends AppController
 
 	public function isAuthorized($user)
 	{
+        if (!empty($this->Auth->user('id'))) {
+            $user = $this->Users->get($this->Auth->user('id'));
+            if (empty($user->phone_number) && empty($user->address) || strpos($user->email, 'required') !== false) {
+                return $this->redirect(['controller' => 'Users' , 'action' => 'setPassword']);
+            }
+        }
+
 		if (in_array($this->request->getParam('action'), ['delete','add'])) {
 			$teamId = $this->request->getParam('team_id');
 			if ($this->TeamMembers->isAdmin($teamId, $user['id'])) {
