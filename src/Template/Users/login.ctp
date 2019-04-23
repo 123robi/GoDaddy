@@ -10,28 +10,21 @@
 		</div>
 		<?= $this->Form->button(__('Login'),['class'=>'btn btn-success btn-lg float-right login_button mt-5']); ?>
 		<?= $this->Form->end() ?>
+		<?echo $this->Form->postLink(
+		'Login with Facebook',
+		[
+		'prefix' => false,
+		'plugin' => 'ADmad/SocialAuth',
+		'controller' => 'Auth',
+		'action' => 'login',
+		'provider' => 'facebook',
+		'?' => ['redirect' => $this->request->getQuery('redirect')]
+		],
+		['class'=>'btn btn-success btn-lg float-right login_button mt-3 mb-3 facebook']
+		);?>
 
 		<div class="margin-top">
 			<p class="center-align">Do not have an account? <b><?php echo $this->Html->link('Sign up',['controller' => 'Users', 'action' => 'register1'],['class' => 'center-align']); ?></b> </p>
 		</div>
-	</div>
-
-	<?echo $this->Form->postLink(
-	'Login with Facebook',
-	[
-	'prefix' => false,
-	'plugin' => 'ADmad/SocialAuth',
-	'controller' => 'Auth',
-	'action' => 'login',
-	'provider' => 'facebook',
-	'?' => ['redirect' => $this->request->getQuery('redirect')]
-	]
-	);?>
-
-	<div
-			class="fb-like"
-			data-share="true"
-			data-width="450"
-			data-show-faces="true">
 	</div>
 </div>

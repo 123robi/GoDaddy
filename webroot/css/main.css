@@ -36,6 +36,14 @@ button {cursor: pointer;}
 .fc-today {background-color: #907272;color: white;}
 .table-striped {color: white}
 #profile {display: block;margin-left: auto;margin-right: auto;}
+.facebook {
+     background-color: #4267b2; !important;
+     border-color: #4267b2 !important;
+ }
+.facebook:hover, .facebook:active, .facebook:focus  {
+    background-color: #4267b2; !important;
+    border-color: #4267b2 !important;
+}
 
 
 
