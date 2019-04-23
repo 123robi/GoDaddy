@@ -29,7 +29,7 @@ class UsersController extends AppController
 
 	public function isAuthorized($user)
 	{
-		if (in_array($this->request->getParam('action'), ['register1','register2','login','logout','add'])) {
+		if (in_array($this->request->getParam('action'), ['register1','register2','login','logout','add', 'setPassword'])) {
 			return true;
 		}
 
@@ -113,6 +113,23 @@ class UsersController extends AppController
 		return $this->redirect($this->Auth->logout());
 	}
 
+	public function setPassword() {
+		$user = $this->Users->get($this->Auth->user('id'));
+		if (!empty($user->phone_number) && !empty($user->address)) {
+			return $this->redirect(['controller' => 'Teams' , 'action' => 'index']);
+		}
+		$user->password='';
+
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$user->password = $this->request->getData('password');
+			$user->phone_number = $this->request->getData('phone_number');
+			$user->address = $this->request->getData('address');
+			if ($this->Users->save($user)) {
+				return $this->redirect(['controller' => 'Teams' , 'action' => 'index']);
+			}
+		}
+		$this->set(compact('user'));
+	}
 	/**
 	 * @return \Cake\Http\Response|null
 	 */

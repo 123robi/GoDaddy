@@ -54,7 +54,7 @@ class Application extends BaseApplication
             // page with "error" query string var.
             'loginUrl' => '/login',
             // URL to redirect to after authentication (string or array).
-            'loginRedirect' => '/teams',
+            'loginRedirect' => '/setPassword',
             // Boolean indicating whether user identity should be returned as entity.
             'userEntity' => false,
             // User model.
@@ -83,6 +83,7 @@ class Application extends BaseApplication
                         ],
                         'fields' => [
                             'email',
+                            'name',
                             // To get a full list of all posible values, refer to
                             // https://developers.facebook.com/docs/graph-api/reference/user
                         ],

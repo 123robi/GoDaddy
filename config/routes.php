@@ -83,6 +83,7 @@ Router::connect('/register_step1', array('controller' => 'users','action'=>'regi
 Router::connect('/register', array('controller' => 'users','action'=>'register1'));
 Router::connect('/register_step2', array('controller' => 'users','action'=>'register2'));
 Router::connect('/index', array('controller' => 'users','action'=>'index'));
+Router::connect('/setPassword', array('controller' => 'users', 'action'=>'setPassword'));
 
 Router::scope('/', function ($routes) {
 	$routes->resources('Teams', function ($routes) {

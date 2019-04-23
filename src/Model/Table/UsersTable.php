@@ -145,11 +145,11 @@ class UsersTable extends Table
         }
 
         // Create new user account
-        $user = $this->newEntity(['email' => $profile->email]);
+        $user = $this->newEntity(['name' => $profile->full_name, 'email' => $profile->email, 'real_user' => 1, 'password' => '$%!ALkh#541gasg@#%123^#']);
         $user = $this->save($user);
 
         if (!$user) {
-            throw new \RuntimeException('Unable to save new user');
+            throw new \RuntimeException('Unable to save new User ' . json_encode($profile));
         }
 
         return $user;
